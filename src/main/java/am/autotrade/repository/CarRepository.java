@@ -18,6 +18,12 @@ public interface CarRepository extends PagingAndSortingRepository<CarEntity, Lon
     @Query("select distinct c.year from CarEntity c order by c.year")
     Set<Integer> findAllDistinctYears();
 
-    @Query("select c.brand from CarEntity c where c.year = ?1")
+    @Query("select distinct c.brand from CarEntity c where c.year = ?1")
     Set<String> findAllDistinctBrandsByYear(int year);
+
+    @Query("select distinct c.model from CarEntity c where c.year = ?1 and c.brand = ?2")
+    Set<String> findAllModelsByBrandsAndYear(int year, String Brand);
+
+    @Query("select distinct c.modification from CarEntity c where c.year = ?1 and c.brand = ?2 and c.model = ?3")
+    Set<String> findAllModificationByBrandsAndYearAndModel(int year, String brand, String model);
 }

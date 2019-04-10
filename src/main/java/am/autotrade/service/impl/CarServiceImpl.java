@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,11 +31,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getCarById(Long id) {
+    public Optional<Car> getCarById(Long id) {
 
         Optional<CarEntity> carEntityOpt = carRepository.findById(id);
 
-        return carEntityOpt.map(carEntity -> mapper.map(carEntity, Car.class)).orElse(null);
+        return carEntityOpt.map(carEntity -> mapper.map(carEntity, Car.class));
     }
 
     @Override
@@ -53,6 +52,22 @@ public class CarServiceImpl implements CarService {
         Set<String> distinctBrands = carRepository.findAllDistinctBrandsByYear(year);
 
         return distinctBrands;
+    }
+
+    @Override
+    public Set<String> getAllDistinctModelsByBrandAndYear(Integer year, String brand) {
+
+        Set<String> distinctModels = carRepository.findAllModelsByBrandsAndYear(year, brand);
+
+        return distinctModels;
+    }
+
+    @Override
+    public Set<String> getAllModificationByBrandsAndYearAndModel(Integer year, String brand, String model) {
+
+        Set<String> distinctModifications = carRepository.findAllModificationByBrandsAndYearAndModel(year, brand, model);
+
+        return distinctModifications;
     }
 
 }

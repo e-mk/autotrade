@@ -2,6 +2,7 @@ package am.autotrade.service;
 
 import am.autotrade.model.Car;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,11 +12,15 @@ public interface CarService {
 
     Optional<Car> getCarById(Long id);
 
+    Optional<Car> getCar(Car car);
+
+    List<Car> getAllCars();
+
     Set<Integer> getAllDistinctYears();
 
     Set<String> getAllDistinctBrandsByYear(Integer year);
 
-    Set<String> getAllDistinctModelsByBrandAndYear(Integer year, String brand);
+    Set<String> getAllDistinctModelsByYearAndBrand(Integer year, String brand);
 
-    Set<String> getAllModificationByBrandsAndYearAndModel(Integer year, String brand, String model);
+    Set<String> getAllDistinctModificationsByYearAndBrandAndModel(Integer year, String brand, String model);
 }

@@ -5,9 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface CarRepository extends PagingAndSortingRepository<CarEntity, Long> {
+
+    Optional<CarEntity> findByYearAndBrandAndModelAndModification(Integer year, String brand, String model, String modification);
 
     List<CarEntity> findByYear(Integer year);
 

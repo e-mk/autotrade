@@ -1,11 +1,10 @@
 package am.autotrade;
 
-import am.autotrade.entity.CarEntity;
-import am.autotrade.repository.CarRepository;
+import am.autotrade.model.Car;
+import am.autotrade.service.CarService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,22 +25,22 @@ public class AutotradeApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(CarRepository repository) {
+	public CommandLineRunner demo(CarService service) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new CarEntity(2010, "BMW", "AAA", "AAA"));
-			repository.save(new CarEntity(2010, "Mini", "BBB", "BBB"));
+			service.saveCar(new Car(2011, "BMW", "AAA", "AAA"));
+			service.saveCar(new Car(2010, "Mini", "BBB", "BBB"));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
-			for (CarEntity customer : repository.findAll()) {
+			for (Car customer : service.getAllCars()) {
 				log.info(customer.toString());
 			}
 			log.info("");
 
 			// fetch an individual customer by ID
-			repository.findById(1L)
+			service.getCarById(1L)
 					.ifPresent(customer -> {
 						log.info("Customer found with findById(1L):");
 						log.info("--------------------------------");

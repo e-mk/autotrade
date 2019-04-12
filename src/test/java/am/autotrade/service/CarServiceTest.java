@@ -57,7 +57,7 @@ public class CarServiceTest {
 
         generateTestData();
 
-        Set<String> distinctModels = carService.getAllDistinctModelsByBrandAndYear(2010, "BMW");
+        Set<String> distinctModels = carService.getAllDistinctModelsByYearAndBrand(2010, "BMW");
 
         assertThat(distinctModels, hasItem("AAA"));
         assertThat(distinctModels, hasItem("AAM"));
@@ -68,7 +68,7 @@ public class CarServiceTest {
 
         generateTestData();
 
-        Set<String> distinctModifications = carService.getAllModificationByBrandsAndYearAndModel(2010, "BMW", "AAA");
+        Set<String> distinctModifications = carService.getAllDistinctModificationsByYearAndBrandAndModel(2010, "BMW", "AAA");
 
         assertThat(distinctModifications, hasItem("AAA1"));
         assertThat(distinctModifications, hasItem("AAA2"));

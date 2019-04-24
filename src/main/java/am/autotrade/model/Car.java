@@ -1,7 +1,10 @@
 package am.autotrade.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Car {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
     private Integer year;
     private String brand;

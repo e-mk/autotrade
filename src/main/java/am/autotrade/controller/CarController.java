@@ -19,6 +19,14 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    @PostMapping
+    public ResponseEntity<Car> postCar(@RequestBody Car car) {
+
+        car = carService.saveCar(car);
+
+        return ResponseEntity.status(200).body(car);
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Car> getCar(@PathVariable Long id) {
 

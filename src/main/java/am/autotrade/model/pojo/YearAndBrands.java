@@ -1,4 +1,4 @@
-package am.autotrade.pojo;
+package am.autotrade.model.pojo;
 
 public class YearAndBrands {
 

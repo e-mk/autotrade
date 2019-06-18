@@ -31,8 +31,7 @@ public class CarController {
     public ResponseEntity<Car> getCar(@PathVariable Long id) {
 
         return carService.getCarById(id).map(car -> ResponseEntity.status(200).body(car))
-                        .orElse(ResponseEntity.notFound()
-                        .build());
+                        .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping

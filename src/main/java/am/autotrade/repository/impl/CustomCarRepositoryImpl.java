@@ -1,6 +1,6 @@
 package am.autotrade.repository.impl;
 
-import am.autotrade.repository.CustomCarRepository;
+import am.autotrade.repository.custom.CustomCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;

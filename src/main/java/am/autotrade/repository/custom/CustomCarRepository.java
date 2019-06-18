@@ -1,4 +1,4 @@
-package am.autotrade.repository;
+package am.autotrade.repository.custom;
 
 import java.util.Set;
 

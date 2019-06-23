@@ -1,7 +1,5 @@
 package am.autotrade.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,10 +16,10 @@ public class SubCategoryEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
-    @OneToMany(mappedBy = "subCategoryEntity", fetch = FetchType.LAZY)
-    private Set<CarPartEntity> carPartEntities;
+    @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)
+    private Set<CarPartEntity> carParts;
 
     public Long getId() {
         return id;
@@ -39,19 +37,19 @@ public class SubCategoryEntity {
         this.name = name;
     }
 
-    public CategoryEntity getCategoryEntity() {
-        return categoryEntity;
+    public CategoryEntity getCategory() {
+        return category;
     }
 
-    public void setCategoryEntity(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
     }
 
-    public Set<CarPartEntity> getCarPartEntities() {
-        return carPartEntities;
+    public Set<CarPartEntity> getCarParts() {
+        return carParts;
     }
 
-    public void setCarPartEntities(Set<CarPartEntity> carPartEntities) {
-        this.carPartEntities = carPartEntities;
+    public void setCarParts(Set<CarPartEntity> carParts) {
+        this.carParts = carParts;
     }
 }

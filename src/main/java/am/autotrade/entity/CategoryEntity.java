@@ -19,8 +19,8 @@ public class CategoryEntity {
     @Column(name = "parentCategory", nullable = false)
     private ParentCategory parentCategory;
 
-    @OneToMany(mappedBy = "categoryEntity", fetch = FetchType.EAGER)
-    private Set<SubCategoryEntity> subCategoryEntities;
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    private Set<SubCategoryEntity> subCategories;
 
     public Long getId() {
         return id;
@@ -46,11 +46,11 @@ public class CategoryEntity {
         this.parentCategory = parentCategory;
     }
 
-    public Set<SubCategoryEntity> getSubCategoryEntities() {
-        return subCategoryEntities;
+    public Set<SubCategoryEntity> getSubCategories() {
+        return subCategories;
     }
 
-    public void setSubCategoryEntities(Set<SubCategoryEntity> subCategoryEntities) {
-        this.subCategoryEntities = subCategoryEntities;
+    public void setSubCategories(Set<SubCategoryEntity> subCategories) {
+        this.subCategories = subCategories;
     }
 }

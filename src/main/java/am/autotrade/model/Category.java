@@ -7,12 +7,12 @@ import java.util.Set;
 
 public class Category {
 
-    @ApiModelProperty(hidden = true)
+    @ApiModelProperty(readOnly = true)
     private Long id;
     private String name;
     private ParentCategory parentCategory;
 
-    @ApiModelProperty(hidden = true)
+    @ApiModelProperty(readOnly = true)
     private Set<SubCategory> subCategories;
 
     public Long getId() {

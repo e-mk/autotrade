@@ -37,24 +37,28 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Optional<Category> getCategoryById(Long id) {
-        Optional<CategoryEntity> categoryEntity = categoryRepository.findById(id);
-        categoryEntity.orElseThrow(() -> new CategoryNotFoundException(String.format("Category with id :: %d not found", id)));
-        return Optional.empty();
+
+        Optional<CategoryEntity> categoryEntityOpt = categoryRepository.findById(id);
+        categoryEntityOpt.orElseThrow(() -> new CategoryNotFoundException(String.format("Category with id :: %d not found", id)));
+
+        Category category = mapper.map(categoryEntityOpt.get(), Category.class);
+
+        return Optional.of(category);
     }
 
     @Override
     public SubCategory saveSubCategory(SubCategory subCategory) {
 
-        if (subCategory.getCategoryInfo() == null || subCategory.getCategoryInfo().getId() == null) {
+        if (subCategory.getCategory() == null || subCategory.getCategory().getId() == null) {
             throw new CategoryNotFoundException("Can't add sub category to non existing category!");
         }
 
-        Optional<CategoryEntity> categoryEntityOpt = categoryRepository.findById(subCategory.getCategoryInfo().getId());
+        Optional<CategoryEntity> categoryEntityOpt = categoryRepository.findById(subCategory.getCategory().getId());
 
         categoryEntityOpt.orElseThrow(() -> new CategoryNotFoundException("Can't add sub category to non existing category!"));
 
         SubCategoryEntity subCategoryEntity = mapper.map(subCategory, SubCategoryEntity.class);
-        subCategoryEntity.setCategoryEntity(categoryEntityOpt.get());
+        subCategoryEntity.setCategory(categoryEntityOpt.get());
         subCategoryEntity = subCategoryRepository.save(subCategoryEntity);
 
         return mapper.map(subCategoryEntity, SubCategory.class);
@@ -71,8 +75,8 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         SubCategory subCategory = subCategoryOpt.get();
-        CategoryEntity categoryEntity = subCategoryEntityOpt.get().getCategoryEntity();
-        subCategory.setCategoryInfo(new CategoryInfo(mapper.map(categoryEntity, Category.class)));
+        CategoryEntity categoryEntity = subCategoryEntityOpt.get().getCategory();
+        subCategory.setCategory(new CategoryInfo(mapper.map(categoryEntity, Category.class)));
         //TODO add mappings..
         return Optional.of(subCategory);
     }

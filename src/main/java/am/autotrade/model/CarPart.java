@@ -1,36 +1,18 @@
-package am.autotrade.entity;
+package am.autotrade.model;
 
-import javax.persistence.*;
+import io.swagger.annotations.ApiModelProperty;
 
-@Entity
-@Table(name = "car_parts")
-public class CarPartEntity {
+public class CarPart {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @ApiModelProperty(readOnly = true)
     private Long id;
-
-    @Column(name = "number", nullable = false, unique = true)
     private String number;
-
-    @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "price", nullable = false)
     private Integer price;
-
-    @Column(name = "image")
     private String image;
-
-    @Column(name = "count", nullable = false)
     private Integer count;
-
-    @ManyToOne
-    @JoinColumn(name = "sub_category_id", nullable = false)
-    private SubCategoryEntity subCategory;
+    private SubCategoryInfo subCategory;
 
     public Long getId() {
         return id;
@@ -88,11 +70,11 @@ public class CarPartEntity {
         this.count = count;
     }
 
-    public SubCategoryEntity getSubCategory() {
+    public SubCategoryInfo getSubCategory() {
         return subCategory;
     }
 
-    public void setSubCategory(SubCategoryEntity subCategory) {
+    public void setSubCategory(SubCategoryInfo subCategory) {
         this.subCategory = subCategory;
     }
 }

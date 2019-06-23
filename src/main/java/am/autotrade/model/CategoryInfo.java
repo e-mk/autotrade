@@ -6,7 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 public class CategoryInfo {
 
     private Long id;
+
+    @ApiModelProperty(readOnly = true)
     private String name;
+
+    @ApiModelProperty(readOnly = true)
     private ParentCategory parentCategory;
 
     public Long getId() {

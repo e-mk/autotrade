@@ -17,7 +17,7 @@ public class CarPartController {
     @PostMapping
     public ResponseEntity<CarPart> postCarPart(@RequestBody CarPart carPart) {
 
-        carPart = carPartService.saveCarPart(carPart);
+        carPart = carPartService.saveOrUpdateCarPart(carPart);
 
         return ResponseEntity.status(200).body(carPart);
     }

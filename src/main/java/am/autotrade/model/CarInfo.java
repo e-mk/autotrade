@@ -4,24 +4,24 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Set;
 
-public class Car {
+public class CarInfo {
+
+    private Long id;
 
     @ApiModelProperty(readOnly = true)
-    private Long id;
     private Integer year;
+
+    @ApiModelProperty(readOnly = true)
     private String brand;
+
+    @ApiModelProperty(readOnly = true)
     private String model;
+
+    @ApiModelProperty(readOnly = true)
     private String modification;
+
+    @ApiModelProperty(readOnly = true)
     private Set<CarPart> carParts;
-
-    public Car() { }
-
-    public Car(Integer date, String brand, String model, String modification) {
-        this.year = date;
-        this.brand = brand;
-        this.model = model;
-        this.modification = modification;
-    }
 
     public Long getId() {
         return id;
@@ -69,16 +69,5 @@ public class Car {
 
     public void setCarParts(Set<CarPart> carParts) {
         this.carParts = carParts;
-    }
-
-    @Override
-    public String toString() {
-        return "CarEntity{" +
-                "id=" + id +
-                ", year=" + year +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", modification='" + modification + '\'' +
-                '}';
     }
 }

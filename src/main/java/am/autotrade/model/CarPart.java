@@ -2,6 +2,8 @@ package am.autotrade.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Set;
+
 public class CarPart {
 
     @ApiModelProperty(readOnly = true)
@@ -13,6 +15,7 @@ public class CarPart {
     private String image;
     private Integer count;
     private SubCategoryInfo subCategory;
+    private Set<CarInfo> cars;
 
     public Long getId() {
         return id;
@@ -76,5 +79,13 @@ public class CarPart {
 
     public void setSubCategory(SubCategoryInfo subCategory) {
         this.subCategory = subCategory;
+    }
+
+    public Set<CarInfo> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<CarInfo> cars) {
+        this.cars = cars;
     }
 }

@@ -1,6 +1,7 @@
 package am.autotrade.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "car_parts")
@@ -31,6 +32,13 @@ public class CarPartEntity {
     @ManyToOne
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategoryEntity subCategory;
+
+    @ManyToMany
+    @JoinTable(
+            name = "car_to_car_part",
+            joinColumns = @JoinColumn(name = "car_part_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id"))
+    private Set<CarEntity> cars;
 
     public Long getId() {
         return id;
@@ -94,5 +102,13 @@ public class CarPartEntity {
 
     public void setSubCategory(SubCategoryEntity subCategory) {
         this.subCategory = subCategory;
+    }
+
+    public Set<CarEntity> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<CarEntity> cars) {
+        this.cars = cars;
     }
 }

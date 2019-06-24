@@ -9,7 +9,7 @@ public interface CarPartService {
 
     Optional<CarPart> getCarPartById(Long carPartId);
 
-    CarPart saveCarPart(CarPart carPart);
+    CarPart saveOrUpdateCarPart(CarPart carPart);
 
     List<CarPart> getCarPartsForSubCategoryId(Long subCategoryId);
 

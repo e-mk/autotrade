@@ -57,6 +57,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public boolean deleteCar(Long id) {
+        carRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
     public List<Car> getAllCars() {
 
         Iterable<CarEntity> carEntityIterable = carRepository.findAll();

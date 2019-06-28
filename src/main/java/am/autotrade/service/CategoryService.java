@@ -11,10 +11,13 @@ public interface CategoryService {
 
     Optional<Category> getCategoryById(Long id);
 
+    boolean deleteCategory(Long id);
+
     SubCategory saveSubCategory(SubCategory subCategory);
 
     Optional<SubCategory> getSubCategoryById(Long id);
 
     Optional<SubCategory> getSubCategory(SubCategory subCategory);
 
+    boolean deleteSubCategory(Long id);
 }

@@ -34,6 +34,12 @@ public class CarController {
                         .orElse(ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteCar(@PathVariable Long id) {
+        carService.deleteCar(id);
+        return ResponseEntity.status(HttpStatus.OK).body("deleted car with id :: " + id);
+    }
+
     @GetMapping
     public ResponseEntity<List<Car>> getCars(@RequestParam(required = false) Integer year,
                                              @RequestParam(required = false) String brand,

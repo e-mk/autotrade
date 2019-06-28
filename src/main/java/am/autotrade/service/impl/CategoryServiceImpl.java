@@ -8,6 +8,7 @@ import am.autotrade.model.CategoryInfo;
 import am.autotrade.model.SubCategory;
 import am.autotrade.repository.CategoryRepository;
 import am.autotrade.repository.SubCategoryRepository;
+import am.autotrade.service.CarPartService;
 import am.autotrade.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CarPartService carPartService;
 
     @Autowired
     private ModelMapper mapper;
@@ -44,6 +48,20 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = mapper.map(categoryEntityOpt.get(), Category.class);
 
         return Optional.of(category);
+    }
+
+    @Override
+    public boolean deleteCategory(Long id) {
+
+        Optional<CategoryEntity> categoryEntityOpt = categoryRepository.findById(id);
+        categoryEntityOpt.orElseThrow(() -> new CategoryNotFoundException(String.format("Category with id :: %d not found", id)));
+
+        if (categoryEntityOpt.get().getSubCategories().isEmpty()) {
+            categoryRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -84,6 +102,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<SubCategory> getSubCategory(SubCategory subCategory) {
         return Optional.empty();
+    }
+
+    @Override
+    public boolean deleteSubCategory(Long id) {
+        if (carPartService.getCarPartsForSubCategoryId(id).isEmpty()) {
+            subCategoryRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 
 }

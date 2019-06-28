@@ -14,6 +14,8 @@ public interface CarService {
 
     Optional<Car> getCar(Car car);
 
+    boolean deleteCar(Long id);
+
     List<Car> getAllCars();
 
     Set<Integer> getAllDistinctYears();
